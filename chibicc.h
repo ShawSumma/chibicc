@@ -18,6 +18,15 @@
 #include <time.h>
 #include <unistd.h>
 
+#include <gc.h>
+
+#define malloc(a) (GC_malloc((a)))
+#define calloc(a, b) (GC_malloc((a) * (b)))
+#define realloc(a, b) (GC_realloc((a), (b)))
+#define free(_) ({})
+#define strdup(a) (GC_strdup((a)))
+#define strndup(a, b) (GC_strndup((a), (b)))
+
 #define MAX(x, y) ((x) < (y) ? (y) : (x))
 #define MIN(x, y) ((x) < (y) ? (x) : (y))
 
@@ -302,6 +311,7 @@ typedef enum {
   TY_VOID,
   TY_BOOL,
   TY_CHAR,
+  TY_BYTE,
   TY_SHORT,
   TY_INT,
   TY_LONG,
@@ -382,6 +392,7 @@ extern Type *ty_short;
 extern Type *ty_int;
 extern Type *ty_long;
 
+extern Type *ty_schar;
 extern Type *ty_uchar;
 extern Type *ty_ushort;
 extern Type *ty_uint;
@@ -449,6 +460,7 @@ void hashmap_test(void);
 // main.c
 //
 
+int main(int argc, char **argv);
 bool file_exists(char *path);
 
 extern StringArray include_paths;

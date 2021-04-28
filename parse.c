@@ -513,8 +513,10 @@ static Type *declspec(Token **rest, Token *tok, VarAttr *attr) {
       ty = ty_bool;
       break;
     case CHAR:
-    case SIGNED + CHAR:
       ty = ty_char;
+      break;
+    case SIGNED + CHAR:
+      ty = ty_schar;
       break;
     case UNSIGNED + CHAR:
       ty = ty_uchar;
